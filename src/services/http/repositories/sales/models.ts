@@ -37,8 +37,7 @@ export interface Sale {
 // commissions
  
 export interface Commission {
-  saler: number
+  saler_name: string
   total_comission: number
-  name: string
-  total_salers: number
+  total_sales: number
 }

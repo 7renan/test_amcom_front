@@ -31,8 +31,6 @@ import { Loading } from "../../../components/Basics/Loading";
 import { Product, Sale as SaleModel } from "../../../services/http/repositories/sales/models"
 
 import { SaleRepository } from "../../../services/http/repositories/sales/SaleRepository";
-import { Action } from "../../../components/Basics/Action";
-import { DeleteAlert } from "../../../components/Basics/DeleteAlert";
 
 
 // utils

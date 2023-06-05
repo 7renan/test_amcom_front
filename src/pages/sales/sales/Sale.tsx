@@ -11,6 +11,7 @@ import { Sale as SaleModel } from "../../../services/http/repositories/sales/mod
 import { SaleRepository } from "../../../services/http/repositories/sales/SaleRepository";
 import { Action } from "../../../components/Basics/Action";
 import { DeleteAlert } from "../../../components/Basics/DeleteAlert";
+import { Breadcrumb } from "../../../components/Basics/Breadcrumb";
 
 
 export function Sale() {
@@ -33,6 +34,12 @@ export function Sale() {
 
   return (
     <Scaffold>
+
+      <Breadcrumb
+        items={[
+          <Text as='b' color='primary.600'>Vendas</Text>
+        ]}
+      />
       <Table variant='table'>
 
         {
