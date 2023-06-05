@@ -1,17 +1,18 @@
 
 export interface Product {
+  code: number
   description: string
   value_unit: number
   commission:number
 }
 
 export interface ItemSale {
-  id: number
-  product : Product
+  product : Product | undefined
   amount: number
 }
 
 export interface Customer {
+  id: number
   name: string
   email: string 
   phone: string
