@@ -33,7 +33,7 @@ export function Sidebar({ hidden }: Props) {
 
       <MenuHeader>AMCOM</MenuHeader>
       <MenuItem name="Vendas" path={AppRoutes.saleList} />
-      <MenuItem name="Comissões" path="#" />
+      <MenuItem name="Comissões" path={AppRoutes.commissions} />
     </Flex>
   )
 }

@@ -6,6 +6,9 @@ export class AppRoutes {
   public static saleCreate = "/sale-create"
   public static saleDetail = "/sale-detail"
   public static saleEdit = "/sale-edit"
+
+  //
+  public static commissions = "/comissions"
   
 
 }

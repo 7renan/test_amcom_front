@@ -22,8 +22,6 @@ export class SaleRepository {
   }
 
   public static async saleDetail(id: number){
-    console.log('KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK')
-    console.log(id)
     try {
       const payload = await api.get(`${baseUrlV1}/sales/${id}`)
       return payload.data
