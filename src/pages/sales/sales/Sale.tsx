@@ -12,6 +12,8 @@ import { SaleRepository } from "../../../services/http/repositories/sales/SaleRe
 import { Action } from "../../../components/Basics/Action";
 import { DeleteAlert } from "../../../components/Basics/DeleteAlert";
 import { Breadcrumb } from "../../../components/Basics/Breadcrumb";
+import { ActionMenu } from "../../../components/Basics/ActionMenu";
+import { FaPlus } from "react-icons/fa";
 
 
 export function Sale() {
@@ -38,6 +40,11 @@ export function Sale() {
       <Breadcrumb
         items={[
           <Text as='b' color='primary.600'>Vendas</Text>
+        ]}
+      />
+      <ActionMenu
+        actions={[
+          { text: 'Alterar dados', icon: FaPlus, actionLink: AppRoutes.saleCreate, color: 'primary.500' },
         ]}
       />
       <Table variant='table'>

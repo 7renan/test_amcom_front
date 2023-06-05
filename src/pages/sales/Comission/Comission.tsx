@@ -6,7 +6,8 @@ import { Scaffold } from "../../../components/Scaffold";
 import { CommissionRepository } from "../../../services/http/repositories/sales/CommissionRepository";
 
 
-import { Table, TableContainer, Thead, Tr, Td, Tbody, Text, Tfoot, TableCaption } from "@chakra-ui/react";
+import { Table, TableContainer, Thead, Tr, Td, Tbody, Text, Tfoot, TableCaption, Button, Flex } from "@chakra-ui/react";
+import { Input } from "../../../components/Basics/Input";
 import { Action } from "../../../components/Basics/Action";
 import { Loading } from "../../../components/Basics/Loading";
 
@@ -18,12 +19,16 @@ import { RiHome2Fill } from "react-icons/ri";
 // utils 
 import { totalCommission as getTotalCommission } from "../../../services/utilities/commission";
 import { number } from "yup";
+import { SearchIcon } from "@chakra-ui/icons";
 
 export function Commision() {
 
   const [isLoading, setIsLoading] = useState(false)
   const [commissions, setCommissions] = useState<CommissionModel[]>([])
   const [totalCommission, setTotalCommisson] = useState(0)
+
+  const [dateInit, setDateInit] = useState('')
+  const [dateFinal, setDateFinal] = useState('')
 
 
 
@@ -49,6 +54,26 @@ export function Commision() {
           <Text as='b' color='primary.600'>Comissões</Text>
         ]}
       />
+      <Flex
+        alignItems='end'
+        gap='0.5rem'
+        maxWidth='42rem'
+        my='1rem'
+      >
+        <Input label="Início" name="dateInit" onChange={(e) => setDateInit(e.target.value)} type="date" isRequired />
+        <Input label="Fim" name="dateFinal" onChange={(e) => setDateFinal(e.target.value)} type="date" isRequired />
+        <Button
+          disabled={(dateInit && dateFinal) == ''}
+          onClick={async () => {
+            setIsLoading(true)
+            const data = await CommissionRepository.commissions(dateInit, dateFinal)
+            setCommissions(data)
+            setIsLoading(false)
+          }}
+        >
+          <SearchIcon />
+        </Button>
+      </Flex>
       <Table variant='table'>
 
         {

@@ -39,8 +39,9 @@ export function SaleEdit() {
       <Breadcrumb
         items={[
           <RiHome2Fill size='1.5rem' color='gray.900' />,
-          <Text as='b'>Cadastro de pessoas físicas</Text>,
-          <Text as='b' color='primary.600'>Editar dados</Text>
+          <Text as='b'>Vendas</Text>,
+          <Text as='b'>Detalhes da venda</Text>,
+          <Text as='b' color='primary.600'>Editar venda</Text>
         ]}
       />
       <ActionMenu
