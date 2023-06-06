@@ -7,13 +7,16 @@ import { AppRoutes } from "../../../routes/AppRoutes";
 import { Loading } from "../../../components/Basics/Loading";
 
 // models
-import { Sale as SaleModel } from "../../../services/http/repositories/sales/models"
+import { SaleCreate, Sale as SaleModel } from "../../../services/http/repositories/sales/models"
 import { SaleRepository } from "../../../services/http/repositories/sales/SaleRepository";
 import { Action } from "../../../components/Basics/Action";
 import { DeleteAlert } from "../../../components/Basics/DeleteAlert";
 import { Breadcrumb } from "../../../components/Basics/Breadcrumb";
 import { ActionMenu } from "../../../components/Basics/ActionMenu";
 import { FaPlus } from "react-icons/fa";
+
+// utils
+import { totalSales } from "../../../services/utilities/sales";
 
 
 export function Sale() {
@@ -91,7 +94,7 @@ export function Sale() {
                       <Td>{itemSale.customer.name}</Td>
                       <Td>{itemSale.saler.name}</Td>
                       <Td>{itemSale.date}</Td>
-                      <Td>-- --</Td>
+                      <Td>{totalSales(itemSale)}</Td>
                       <Td>
                         <Action actions={[
                           { name: 'Editar venda', linkAction: () => { } },
