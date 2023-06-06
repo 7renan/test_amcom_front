@@ -44,7 +44,7 @@ export function Sale() {
       />
       <ActionMenu
         actions={[
-          { text: 'Alterar dados', icon: FaPlus, actionLink: AppRoutes.saleCreate, color: 'primary.500' },
+          { text: 'Adicionar vendas', icon: FaPlus, actionLink: AppRoutes.saleCreate, color: 'primary.500' },
         ]}
       />
       <Table variant='table'>

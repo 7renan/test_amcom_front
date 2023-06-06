@@ -34,6 +34,16 @@ export interface Sale {
 
 }
 
+export interface SaleCreate {
+  id: number
+  invoice: number
+  date: string
+  customer: number
+  saler: number,
+  products: ItemSale[] | null
+
+}
+
 
 // commissions
  

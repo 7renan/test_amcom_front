@@ -64,7 +64,7 @@ export function SaleDetail() {
       />
       <ActionMenu
         actions={[
-          { text: 'Alterar dados', icon: FaEdit, actionLink: AppRoutes.saleEdit, color: 'warning.500' },
+          { text: 'Alterar dados', icon: FaEdit, actionLink: `${AppRoutes.saleEdit}/${id}`, color: 'warning.500' },
         ]}
       />
       {
@@ -137,12 +137,12 @@ export function SaleDetail() {
                         <Tbody>
                           {sale?.products.map((product) => (
                             <Tr key={product.id}>
-                              <Td>{product.product.description}</Td>
+                              <Td>{product.product?.description}</Td>
                               <Td>{product.amount}</Td>
-                              <Td>{product.product.value_unit}</Td>
-                              <Td>{`${product.product.value_unit * product.amount}`} %</Td>
-                              <Td>{product.product.commission}</Td>
-                              <Td>R$ {commission(product.product.value_unit, product.product.commission, product.amount)}</Td>
+                              <Td>{product.product?.value_unit}</Td>
+                              <Td>{`${product.product?.value_unit * product.amount}`} %</Td>
+                              <Td>{product.product?.commission}</Td>
+                              <Td>R$ {commission(product.product?.value_unit, product.product?.commission, product.amount)}</Td>
                             </Tr>
                           ))}
                         </Tbody>

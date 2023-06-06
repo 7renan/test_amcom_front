@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useForm } from 'react-hook-form';
-import { Flex, Wrap, WrapItem, FormLabel, Switch, Button, Text, FormControl, Select, Table, TableContainer, Tbody, Td, Thead, Tr } from "@chakra-ui/react";
+import { Flex, Wrap, WrapItem, FormLabel, Switch, Button, Text, FormControl, Select, Table, TableContainer, Tbody, Td, Thead, Tr, useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+
 import { FaTrash } from "react-icons/fa";
 import { ActionMenu } from "../../components/Basics/ActionMenu";
 import { InputData } from "../../components/Basics/InputData";
@@ -10,7 +12,7 @@ import { Breadcrumb } from "../../components/Basics/Breadcrumb";
 import { Input } from '../../components/Basics/Input';
 
 // models
-import { Customer as CustomerModel } from '../../services/http/repositories/sales/models';
+import { Customer as CustomerModel, ItemSale } from '../../services/http/repositories/sales/models';
 import { Saler as SalerModel } from '../../services/http/repositories/salers/models';
 import { Product as ProductModel } from "../../services/http/repositories/sales/models";
 import { ItemSale as ItemSaleModel } from "../../services/http/repositories/sales/models";
@@ -19,11 +21,17 @@ import { ItemSale as ItemSaleModel } from "../../services/http/repositories/sale
 import { CustomerRepository } from '../../services/http/repositories/customers/CustomerRepository';
 import { SalerRepository } from '../../services/http/repositories/salers/SalerRepository';
 import { ProductRepository } from "../../services/http/repositories/products/ProductRepository";
+import { SaleRepository } from "../../services/http/repositories/sales/SaleRepository";
 
 import { Loading } from "../../components/Basics/Loading";
+import { AppError } from "../../services/http/erros/AppError";
+import { AppRoutes } from "../../routes/AppRoutes";
 
 
 export function SaleCreate() {
+
+  const toast = useToast()
+  const navigate = useNavigate()
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -59,7 +67,7 @@ export function SaleCreate() {
   }
 
   const handleItemSaleAdded = (qtd: string) => {
-    const itemSale: ItemSaleModel = {
+    const itemSale: ItemSale = {
       product: productSelect,
       amount: Number(qtd)
     }
@@ -74,9 +82,32 @@ export function SaleCreate() {
     formState: { errors }
   } = useForm();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-
+  const onSubmit = async (data: any) => {
+    try {
+      setIsLoading(true)
+      data['products'] = itemProductsSelected
+      await SaleRepository.saleCreate(data)
+      toast({
+        title: 'Sucesso!',
+        description: 'Venda cadastrada com sucesso!',
+        status: 'success',
+        duration: 9000,
+        isClosable: true
+      })
+      setIsLoading(false)
+      navigate(AppRoutes.saleList)
+    } catch (err) {
+      console.log(err)
+      if (err instanceof AppError) {
+        toast({
+          title: "Erro",
+          description: err.message,
+          status: 'error',
+          duration: 9000,
+          isClosable: true
+        })
+      }
+    }
   };
 
 
@@ -126,7 +157,7 @@ export function SaleCreate() {
             </Select>
           </WrapItem>
           <WrapItem w='14.5rem'>
-            <Select {...register("salers", { required: true })}>
+            <Select {...register("saler", { required: true })}>
               {salers.map((saler) => (
                 <option value={saler.id}>{saler.name}</option>
               ))}
@@ -210,3 +241,4 @@ export function SaleCreate() {
     </Scaffold>
   )
 }
+
