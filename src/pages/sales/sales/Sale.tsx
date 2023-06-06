@@ -17,6 +17,7 @@ import { FaPlus } from "react-icons/fa";
 
 // utils
 import { totalSales } from "../../../services/utilities/sales";
+import { getDateFormat } from "../../../services/utilities/date_format";
 
 
 export function Sale() {
@@ -93,7 +94,7 @@ export function Sale() {
                       </LinkBox>
                       <Td>{itemSale.customer.name}</Td>
                       <Td>{itemSale.saler.name}</Td>
-                      <Td>{itemSale.date}</Td>
+                      <Td>{getDateFormat(itemSale.date)}</Td>
                       <Td>{totalSales(itemSale)}</Td>
                       <Td>
                         <Action actions={[
